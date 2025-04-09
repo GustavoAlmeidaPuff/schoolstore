@@ -79,6 +79,16 @@
   padding: 1rem 0;
 }
 
+.products-grid.single-product {
+  display: flex;
+  justify-content: center;
+}
+
+.products-grid.single-product .product-card {
+  width: 450px;
+  max-width: 100%;
+}
+
 .product-card {
   background: #FFF5E6;
   border-radius: 24px;

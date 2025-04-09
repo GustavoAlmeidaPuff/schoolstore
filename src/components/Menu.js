@@ -39,6 +39,8 @@ const Menu = ({ addToCart }) => {
     ? products
     : products.filter(product => product.category === selectedCategory);
 
+  const isSingleProduct = filteredProducts.length === 1;
+
   const renderProductImage = (product) => {
     if (product.image) {
       return (
@@ -102,7 +104,7 @@ const Menu = ({ addToCart }) => {
         ))}
       </div>
 
-      <div className="products-grid">
+      <div className={`products-grid ${isSingleProduct ? 'single-product' : ''}`}>
         {filteredProducts.map(product => (
           <div key={product.id} className="product-card">
             <div className="product-image-container">
