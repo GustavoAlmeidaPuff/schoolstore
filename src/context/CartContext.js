@@ -33,10 +33,26 @@ export const CartProvider = ({ children }) => {
     setItems(currentItems => currentItems.filter(item => item.id !== productId));
   };
 
+  const updateQuantity = (productId, newQuantity) => {
+    if (newQuantity <= 0) {
+      removeFromCart(productId);
+      return;
+    }
+    
+    setItems(currentItems => 
+      currentItems.map(item => 
+        item.id === productId 
+          ? { ...item, quantity: newQuantity } 
+          : item
+      )
+    );
+  };
+
   const value = {
     items,
     addToCart,
     removeFromCart,
+    updateQuantity
   };
 
   return (
