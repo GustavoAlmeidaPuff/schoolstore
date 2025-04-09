@@ -15,7 +15,7 @@ const products = [
     name: 'MINI PIZZA SALGADA OU DOCE',
     description: 'Calabresa\nChocolate',
     price: 8.00,
-    category: 'Sanduiches',
+    category: 'Lanches',
     images: ['/images/pizza-s.jpg', '/images/pizza-d.jpg'],
     imageType: 'sideBySide'
   },
@@ -33,7 +33,7 @@ const products = [
 const Menu = ({ addToCart }) => {
   const [selectedCategory, setSelectedCategory] = useState('Todos');
   
-  const categories = ['Todos', 'Sanduiches', 'Bebidas', 'Combos'];
+  const categories = ['Todos', 'Lanches', 'Bebidas', 'Combos'];
   
   const filteredProducts = selectedCategory === 'Todos'
     ? products
