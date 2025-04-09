@@ -28,7 +28,7 @@ const Cart = () => {
     
     const message = `*Novo Pedido - Menu 304*\n\n${orderText}\n\n*Total: R$ ${total.toFixed(2)}*`;
     
-    const whatsappUrl = `https://wa.me/5551952456500?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/5551995245650?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
@@ -45,11 +45,8 @@ const Cart = () => {
         {items.map(item => (
           <div key={item.id} className="cart-item">
             <div className="item-info">
-              <div className="item-image-container">
-                <img src={item.image} alt={item.name} className="item-image" />
-              </div>
               <div>
-                <h3>{item.name}</h3>
+                <h3 className="item-name">{item.name}</h3>
                 <p className="item-price">R$ {item.price.toFixed(2)}</p>
               </div>
             </div>
