@@ -5,6 +5,7 @@ import { useCart } from './context/CartContext';
 import { FaShoppingCart } from 'react-icons/fa';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
+import Notification from './components/Notification';
 import './styles/App.css';
 
 const Header = () => {
@@ -33,6 +34,7 @@ function App() {
       <CartProvider>
         <div className="app">
           <Header />
+          <Notification />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cart" element={<Cart />} />

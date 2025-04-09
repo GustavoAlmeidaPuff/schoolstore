@@ -12,6 +12,7 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }) => {
   const [items, setItems] = useState([]);
+  const [notification, setNotification] = useState({ show: false, product: null });
 
   const addToCart = (product) => {
     setItems(currentItems => {
@@ -27,6 +28,14 @@ export const CartProvider = ({ children }) => {
       
       return [...currentItems, { ...product, quantity: 1 }];
     });
+    
+    // Mostrar notificação
+    setNotification({ show: true, product });
+    
+    // Esconder notificação após 2 segundos
+    setTimeout(() => {
+      setNotification({ show: false, product: null });
+    }, 2000);
   };
 
   const removeFromCart = (productId) => {
@@ -52,7 +61,8 @@ export const CartProvider = ({ children }) => {
     items,
     addToCart,
     removeFromCart,
-    updateQuantity
+    updateQuantity,
+    notification
   };
 
   return (
