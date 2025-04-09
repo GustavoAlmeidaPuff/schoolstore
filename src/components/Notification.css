@@ -6,7 +6,6 @@
   display: flex;
   justify-content: center;
   z-index: 1000;
-  pointer-events: none;
 }
 
 .notification {
@@ -21,11 +20,29 @@
   max-width: 90%;
   width: 320px;
   animation: slideIn 0.3s ease-out forwards, fadeOut 0.3s ease-in 1.7s forwards;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  pointer-events: auto;
+}
+
+.notification:hover {
+  background-color: #7d1fd0;
+  transform: translateY(-2px);
+}
+
+.notification:active {
+  transform: translateY(0);
 }
 
 .notification-icon {
   font-size: 1.5rem;
   color: #4eff4e;
+  flex-shrink: 0;
+}
+
+.notification-cart-icon {
+  font-size: 1.2rem;
+  color: white;
   flex-shrink: 0;
 }
 

@@ -5,7 +5,7 @@ import { FaArrowLeft, FaWhatsapp } from 'react-icons/fa';
 import './Cart.css';
 
 const Cart = () => {
-  const { items, removeFromCart, updateQuantity } = useCart();
+  const { items, removeFromCart, updateQuantity, clearCart } = useCart();
   
   const total = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
 
@@ -88,6 +88,9 @@ const Cart = () => {
         </div>
         <button className="checkout-btn whatsapp-btn" onClick={handleWhatsAppOrder}>
           <FaWhatsapp /> Continuar no WhatsApp
+        </button>
+        <button className="clear-cart-btn" onClick={clearCart}>
+          Limpar Carrinho
         </button>
         <p className="payment-info">
           Aceitamos Pix via encomendas, mas presencialmente apenas dinheiro!
