@@ -16,7 +16,8 @@ const products = [
     description: 'Calabresa\nChocolate',
     price: 8.00,
     category: 'Sanduiches',
-    image: '/images/misto-quente.png'
+    images: ['/images/pizza-s.jpg', '/images/pizza-d.jpg'],
+    imageType: 'sideBySide'
   },
   {
     id: 3,
@@ -24,7 +25,8 @@ const products = [
     description: 'Chocolate\ne Calabresa',
     price: 15.00,
     category: 'Combos',
-    image: '/images/misto-quente.png'
+    images: ['/images/pizza-d.jpg', '/images/pizza-s.jpg'],
+    imageType: 'overlapping'
   }
 ];
 
@@ -37,10 +39,52 @@ const Menu = ({ addToCart }) => {
     ? products
     : products.filter(product => product.category === selectedCategory);
 
+  const renderProductImage = (product) => {
+    if (product.image) {
+      return (
+        <img
+          src={product.image}
+          alt={product.name}
+          className="product-image"
+        />
+      );
+    } else if (product.images && product.imageType === 'sideBySide') {
+      return (
+        <div className="side-by-side-images">
+          <img
+            src={product.images[0]}
+            alt="Pizza Salgada"
+            className="product-image half"
+          />
+          <img
+            src={product.images[1]}
+            alt="Pizza Doce"
+            className="product-image half"
+          />
+        </div>
+      );
+    } else if (product.images && product.imageType === 'overlapping') {
+      return (
+        <div className="overlapping-images">
+          <img
+            src={product.images[0]}
+            alt="Pizza Doce"
+            className="product-image back"
+          />
+          <img
+            src={product.images[1]}
+            alt="Pizza Salgada"
+            className="product-image front"
+          />
+        </div>
+      );
+    }
+  };
+
   return (
     <div className="menu">
       <div className="menu-header">
-        <h1 className="menu-title">Menu</h1>
+        <h1 className="menu-title">Menu <span className="highlight">304</span></h1>
         <p className="menu-subtitle">
           Deliciosas opções para seu lanche escolar
         </p>
@@ -62,11 +106,7 @@ const Menu = ({ addToCart }) => {
         {filteredProducts.map(product => (
           <div key={product.id} className="product-card">
             <div className="product-image-container">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="product-image"
-              />
+              {renderProductImage(product)}
             </div>
             <div className="product-info">
               <h3 className="product-name">{product.name}</h3>
