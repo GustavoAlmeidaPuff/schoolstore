@@ -8,7 +8,8 @@ const products = [
     description: 'Guaraná\nLaranja',
     price: 1.50,
     category: 'Bebidas',
-    image: '/images/suco-laranja.png'
+    image: '/images/suco-laranja.png',
+    outOfStock: false
   },
   {
     id: 2,
@@ -17,7 +18,8 @@ const products = [
     price: 8.00,
     category: 'Lanches',
     images: ['/images/pizza-s.jpg', '/images/pizza-d.jpg'],
-    imageType: 'sideBySide'
+    imageType: 'sideBySide',
+    outOfStock: true
   },
   {
     id: 3,
@@ -26,7 +28,26 @@ const products = [
     price: 15.00,
     category: 'Combos',
     images: ['/images/pizza-d.jpg', '/images/pizza-s.jpg'],
-    imageType: 'overlapping'
+    imageType: 'overlapping',
+    outOfStock: true
+  },
+  {
+    id: 4,
+    name: 'PEDAÇO DE BOLO',
+    description: 'Bolo caseiro\nSabores diversos',
+    price: 7.00,
+    category: 'Lanches',
+    image: '/images/bolo.png',
+    outOfStock: false
+  },
+  {
+    id: 5,
+    name: 'MISTO QUENTE',
+    description: 'Pão, presunto, queijo\ne manteiga',
+    price: 4.50,
+    category: 'Lanches',
+    image: '/images/torrada.png',
+    outOfStock: false
   }
 ];
 
@@ -83,6 +104,12 @@ const Menu = ({ addToCart }) => {
     }
   };
 
+  const handleAddToCart = (product) => {
+    if (!product.outOfStock) {
+      addToCart(product);
+    }
+  };
+
   return (
     <div className="menu">
       <div className="menu-header">
@@ -106,9 +133,10 @@ const Menu = ({ addToCart }) => {
 
       <div className={`products-grid ${isSingleProduct ? 'single-product' : ''}`}>
         {filteredProducts.map(product => (
-          <div key={product.id} className="product-card">
+          <div key={product.id} className={`product-card ${product.outOfStock ? 'out-of-stock' : ''}`}>
             <div className="product-image-container">
               {renderProductImage(product)}
+              {product.outOfStock && <div className="out-of-stock-label">EM FALTA</div>}
             </div>
             <div className="product-info">
               <h3 className="product-name">{product.name}</h3>
@@ -116,9 +144,10 @@ const Menu = ({ addToCart }) => {
               <div className="product-price">R$ {product.price.toFixed(2)}</div>
               <button
                 className="add-to-cart-button"
-                onClick={() => addToCart(product)}
+                onClick={() => handleAddToCart(product)}
+                disabled={product.outOfStock}
               >
-                + Adicionar ao Carrinho
+                {product.outOfStock ? 'Indisponível' : '+ Adicionar ao Carrinho'}
               </button>
             </div>
           </div>
